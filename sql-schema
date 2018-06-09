@@ -1,0 +1,13 @@
+CREATE DATABASE task;
+
+CREATE TABLE `task`.`faculties` (
+  `id` VARCHAR(11) NOT NULL,
+  `dob` DATE NULL,
+  `password` BINARY(60) NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `test`.`faculties` (
+  `id` VARCHAR(11) NOT NULL,
+  `img` BLOB NULL,
+  PRIMARY KEY (`id`));
+
