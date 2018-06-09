@@ -6,7 +6,7 @@ CREATE TABLE `task`.`faculties` (
   `password` BINARY(60) NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `test`.`faculties` (
+CREATE TABLE `task`.`faculties` (
   `id` VARCHAR(11) NOT NULL,
   `img` BLOB NULL,
   PRIMARY KEY (`id`));
