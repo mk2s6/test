@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login System</title>
+		<base href="/">
+		<link type="text/css" rel="stylesheet" href="css/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Acme|Permanent+Marker|Rancho" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+		<script type="text/javascript" src="assets/jq.js"></script>
+		<script type="text/javascript" src="assets/mustache.js"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+		<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    	<link rel="stylesheet" href="assets/datepicker.min.css">
+
+	</head>
+	<body>
+		<nav id="nav_bar">
+			<div class="nav_left">
+				<h1><a href="/">Login System</a></h1>
+			</div>
+			<div class="nav_right">		
+			    <ul>
+
+			    	{{#if isAuthenticated}}
+
+				     	<li><a href="/viewStudents">View Students</a></li>
+				     	<li><a href="/registerStudent">Register student</a></li>
+				     	<li><a href="/logout">Logout</a></li>
+
+			    	{{else}}
+
+				        <li><a href="/login">Login</a></li>
+				     	<li><a href="/facultyRegister">Faculty Register</a></li>
+
+			    	{{/if}}
+			    </ul>
+			</div>
+		</nav>
+{{!-- 		<div id="sidebar">
+			<ul>
+				<li><a href="/">Home</a></li>
+				<li><a href="/about">About Skit</a></li>
+				<li><a href="/administration">Administration</a></li>
+				<li><a href="/academics">Academics</a></li>
+				<li><a href="/infrastructure">Infrastructure</a></li>
+				<li><a href="/contact">Contact Us</a></li>
+			</ul>
+		</div>
+
+ --}}

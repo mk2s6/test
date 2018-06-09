@@ -1,0 +1,34 @@
+{{> header }}
+
+	<div id="main_body">
+		<div class="main_content">
+
+			<h1>{{title}}</h1>
+			<div id="selector">
+				<div class="mdc-select">
+					<select class="mdc-select__native-control" id="optionSelector" style="width : 250px ">
+					</select>
+				  <label class="mdc-floating-label">Select Student Roll Number</label>
+				  <div class="mdc-line-ripple"></div>
+				</div>
+			   	<button type="submit" id="getImage" class="mdc-button mdc-button--raised">
+	                <i class="material-icons mdc-button__icon">how_to_reg</i>
+	                Get Image
+	            </button>
+			</div>
+			<div id="display"></div>
+
+			
+		</div>
+	</div>
+	<script src="https://unpkg.com/blob-util/dist/blob-util.min.js"></script>
+    <script src="js/student.js"></script>
+
+	<script type="text/javascript">
+    	window.mdc.autoInit();
+    	const select = new mdc.select.MDCSelect(document.querySelector('.mdc-select'));
+
+    </script>
+	
+
+{{> footer-end }}

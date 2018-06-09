@@ -1,0 +1,69 @@
+{{> header }}
+
+	<div id="main_body">
+		<div class="main_content">
+        <form id="passform">
+                <div class='mdc-text-field' data-mdc-auto-init='MDCTextField'>
+                    <input class='mdc-text-field__input' type='text' id='id' size='24' maxlength='10' required>
+                    <label for='id' class='mdc-floating-label'>Faculty Id</label>
+                    <div class='mdc-line-ripple'></div> 
+                </div>
+                <div class='mdc-text-field' data-mdc-auto-init='MDCTextField'>
+                    <input class='mdc-text-field__input' type='text' value='' id='dob' required readonly>
+                     <label for='dob' class='mdc-floating-label'>Enter DOB</label>
+                </div>
+                <div class="inline-div">
+                    <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                        <input class="mdc-text-field__input" type="password" autocomplete="off" name='password' size="24" data-type="pwd-info1" id="pass" >
+                        <label for="password" class="mdc-floating-label">Enter Password</label>
+                        <div class="mdc-line-ripple"></div> 
+                    </div>
+                        
+                </div>
+                <div id="pwd-info1">
+                    <p id="smallCh" class="invalid">Password Must contain one small letter</p>
+                    <p id="capital" class="invalid">Password Must contain one capital letter</p>
+                    <p id="number" class="invalid">Password Must contain one number</p>
+                    <P id="length" class="invalid">Password Must be Atleast 8 charecters</P>
+                </div>
+
+              <div class="inline-div">
+                  <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                      <input class="mdc-text-field__input" type="password" autocomplete="off" name='password' size="24" data-type="pwd-info2" id="rePass" >
+                      <label for="password" class="mdc-floating-label">Re-Enter Password</label>
+                      <div class="mdc-line-ripple"></div> 
+                  </div>
+
+              </div>
+              <div id="pwd-info2">
+                  <p id="matches" class="invalid">Entered Passwords does not match</p>
+              </div>
+          
+                <button type="submit" id="submitBtn" class="mdc-button mdc-button--raised" disabled="true">
+                    <i class="material-icons mdc-button__icon">how_to_reg</i>
+                    Register
+                </button>
+        </form>
+		</div>
+  </div>
+
+    <script src="assets/datepicker.min.js"></script>
+    <script>
+        window.mdc.autoInit();
+        $('#dob').on('change', function(event) {
+          event.preventDefault();
+          if($(this).val() !== '') $(this).siblings('label').addClass('mdc-floating-label--float-above');
+          else $(this).siblings('label').removeClass('mdc-floating-label--float-above')
+        }).blur(function(event) {
+             if($(this).val() == '') $(this).parent().addClass('mdc-text-field--invalid');
+             else $(this).parent().removeClass('mdc-text-field--invalid')
+        });
+
+        $('#dob').datepicker({
+            format : 'yyyy-mm-dd'
+        });
+    </script>
+    <script src="js/register.js"></script>
+
+
+{{> footer-end }}
