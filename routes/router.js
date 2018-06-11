@@ -4,6 +4,8 @@ var express =  require('express'),
  bcrypt = require('bcrypt'),
  parser = require('body-parser'),
  fs = require('fs');
+ // Blob = require('blob-util');
+ // require(Blob);
 
 const saltRounds = 10;
 
@@ -12,7 +14,7 @@ var storage = multer.diskStorage({
     cb(null, 'uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() +".jpg")
+    cb(null, req.body.id + '-' +file.fieldname + '-' + Date.now()+".jpeg")
   }
 })
 
@@ -61,23 +63,26 @@ router.get('/registerStudent', function (req, res, next) {
 	res.render('registerStudent.hbs', {title: 'Registration a Student'})
 });	
 
-router.post('/registerStudent'/*, upload.single('img')*/ , function (req, res, next) {
+router.post('/registerStudent', upload.single('img') , function (req, res, next) {
 	const db = require('../dbconfig.js')
 
-	console.log(req.body);
+	console.log(req.file);
 	var id = req.body.id,
-		img = req.body.img;
+		img = req.file.path;
+		image = fs.readFileSync(img);
 
-	query = db.query('INSERT INTO student (id, img)  VALUES (?, ?) ', [id, img], function (err, result, fields) {
-		if(err) {
-			if (err.code === "ER_DUP_ENTRY") res.render('registerStudent.hbs', {
-				title : 'Registration a Student',
-				msg : 'Student Data Already Exists'
-			});
-			else throw err;
-		}
-		else res.render('registerStudent.hbs', {title: 'Registration a Student', msg : 'Student data inserted'});
-	})
+		// console.log("image is " + image);
+		query = db.query('INSERT INTO student (id, img)  VALUES (?, ?) ', [id, image], function (err, result, fields) {
+			if(err) {
+				if (err.code === "ER_DUP_ENTRY") res.render('registerStudent.hbs', {
+					title : 'Registration a Student',
+					msg : 'Student Data Already Exists'
+				});
+				else throw err;
+			}
+			else res.render('registerStudent.hbs', {title: 'Registration a Student', msg : 'Student data inserted'});
+		});
+
 
 });	
 
@@ -102,7 +107,11 @@ router.get('/getImage/:id', function (req, res) {
 		if (err) throw err;
 		var string = JSON.stringify(result);
 		var img = JSON.parse(string);
-		res.send({img})
+		var blob = img[0].img;
+		var buffer = new Buffer( blob );
+		var bufferBase64 = buffer.toString('base64');
+		// console.log(bufferBase64)
+		res.send(bufferBase64);
 	});
 });
 

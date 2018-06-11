@@ -240,3 +240,16 @@ button[disabled=true], button[disabled=disabled] {
 .no-edit , .editable-edit, .editor-edit {
 	display: initial;
 }
+
+#display {
+	width: 50%;
+/*	height: 600px;
+*/	margin : 10px auto;
+}
+
+#display img {
+	width: 50%;
+	height: 500px;
+	margin: 0 auto;
+	object-fit: contain;
+}
