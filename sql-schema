@@ -6,8 +6,8 @@ CREATE TABLE `task`.`faculties` (
   `password` BINARY(60) NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `task`.`faculties` (
+CREATE TABLE `task`.`student` (
   `id` VARCHAR(11) NOT NULL,
-  `img` BLOB NULL,
+  `img` LONGBLOB NULL,
   PRIMARY KEY (`id`));
 

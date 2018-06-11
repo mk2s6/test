@@ -49,11 +49,14 @@ app.set('views', path.join(__dirname , '/views'));
 app.set('view engine', '.hbs');
 
 
-app.listen(8080, function (req, res) {
-	console.log('Server listnening at 8080');
+//setting server and listeing port
+const port = process.env.SERVER_PORT || 4200;
+app.listen(port, function (req, res) {
+	console.log('Server listnening at ' + port);
 });
 
 
+//setting session preset options
 var options = {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -61,9 +64,10 @@ var options = {
   	database : process.env.DB_NAME
 };
 
+//Adding sessions to DB
 var sessionStore = new MySQLStore(options);
 
-
+//Snipeet which creates session variables and uses
 app.use(session({
 	secret: 'askjnaqjcne',
 	resave: false,
@@ -71,23 +75,29 @@ app.use(session({
 	saveUninitialized: false,
 }));
 
+
+//Serving Authentication Packages
 app.use(passport.initialize());
 app.use(passport.session());
 passport.authenticate('local');
 
+
+//Setting locals
 app.use(function(req, res, next) {
 	res.locals.isAuthenticated = req.isAuthenticated();
 	res.locals.username = req.user;
 	next();
 });
 
+//Appling routes
 app.use(index);
+
+//Error Handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-
 app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -97,6 +107,8 @@ app.use(function(err, req, res, next) {
 });
 
 
+
+//Implementing Authentication strategy
 passport.use(new LocalStrategy(
  	function(username, password, done) {
 	const db = require('./dbconfig.js')

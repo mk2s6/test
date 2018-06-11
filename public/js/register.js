@@ -8,10 +8,6 @@ $(function () {
             dob = $('#dob').val(),
             pass1 = $('#pass').val(),
             pass2 = $('#rePass').val();
-
-            console.log(pass1);
-            console.log(pass2)
-
         if(pass1 != pass2 )
             alert("Passwords Do Not Match")
         else {
@@ -23,9 +19,6 @@ $(function () {
                 dob : dob,
         		password : password,
         	};
-
-            console.log(user);
-
             $.ajax({
                 url : '/facultyRegister',
                 type : 'POST',
