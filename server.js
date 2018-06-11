@@ -1,37 +1,47 @@
+//Genral server packages
 const express = require('express');
-const path = require('path');
-var exphbs  = require('express-handlebars');
 const app = express();
+
+//General parser packages
+const path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
+
+//Password hashing package
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
-var type;
+
+const hbs = require('express-hbs');
 
 const index = require('./routes/router');
-const hbs = require('express-hbs');
 const fs = require('fs');
 
-
+//Sessions
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 
+//authentication package and implementation strategy
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 
-
+//dotenv for parsing environment variables
 require('dotenv').config();
 
-var bodyParser = require('body-parser');
 
+//setting up directores
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/src'));
 
+
+//setting up parsers
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+
+//setting up view engine 
 app.engine('hbs', hbs.express4({
   partialsDir: __dirname + '/views/partials'
 }));
